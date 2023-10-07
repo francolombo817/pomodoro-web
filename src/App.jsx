@@ -1,12 +1,20 @@
-import './App.css'
+import { Heading, Flex, Button } from '@chakra-ui/react'
 
 function App() {
 
   return (
-    <>
-      <div>
-      </div>
-    </>
+    <Flex
+      minH="100vh"
+      justifyContent="Center"
+      alignItems="Center"
+      flexDirection="column"
+      gap={6}
+      bgGradient='linear(to-tl, red.800, red.900)'
+    >
+      <Heading>
+        pomodoro
+      </Heading>
+    </Flex>
   )
 }
 
