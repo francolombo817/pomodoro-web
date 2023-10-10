@@ -1,6 +1,8 @@
 import { Heading, Flex, Button } from '@chakra-ui/react'
+import { initialTimer } from './component'
 
 function App() {
+
 
   return (
     <Flex
@@ -11,9 +13,44 @@ function App() {
       gap={6}
       bgGradient='linear(to-tl, red.800, red.900)'
     >
-      <Heading>
+      <Heading
+        color={"white"}
+        fontWeight={"thin"}
+        letterSpacing={"1.2px"}
+        textTransform={"uppercase"}
+      >
         pomodoro
       </Heading>
+
+      <Flex bgGradient={'linear(to-b, red.700, red.900)'}
+        p={{ base: 6, md: 9, lg: 12 }}
+        rounded={"2xl"}
+        alignItems={"center"}
+        flexDirection={"column"}
+        shadow={'dark-lg'}
+      >
+        <Flex
+          gap={{ base: 2, md: 5 }}
+        >
+          {initialTimer.map(({value, display})=>(
+
+          <Button 
+          key={value}
+          colorScheme="blackAlpha"
+            textTransform={"uppercase"}
+            fontWeight={"light"}
+            letterSpacing={"wide"}
+            fontSize={{base: "2xl", md:"medium", lg:"3xl"}}
+            size={{base: "xs", md: "md", lg:"lg"}}
+          >
+            {display}
+          </Button>
+          ))}
+        </Flex>
+
+      </Flex>
+
+
     </Flex>
   )
 }
