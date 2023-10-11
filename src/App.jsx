@@ -1,8 +1,14 @@
 import { Heading, Flex, Button } from '@chakra-ui/react'
-import { initialTimer } from './component'
+import { initialTimer } from './component/InitialTimes'
+import { useState } from 'react'
+import Time from './component/Time'
 
 function App() {
 
+  const [time, setTime] = useState(0)
+  const [timerStart, setTimerStart] = useState(false)
+
+  console.log(time, timerStart);
 
   return (
     <Flex
@@ -32,21 +38,26 @@ function App() {
         <Flex
           gap={{ base: 2, md: 5 }}
         >
-          {initialTimer.map(({value, display})=>(
+          {initialTimer.map(({ value, display }) => (
 
-          <Button 
-          key={value}
-          colorScheme="blackAlpha"
-            textTransform={"uppercase"}
-            fontWeight={"light"}
-            letterSpacing={"wide"}
-            fontSize={{base: "2xl", md:"medium", lg:"3xl"}}
-            size={{base: "xs", md: "md", lg:"lg"}}
-          >
-            {display}
-          </Button>
+            <Button
+              key={value}
+              colorScheme="blackAlpha"
+              textTransform={"uppercase"}
+              fontWeight={"light"}
+              letterSpacing={"wide"}
+              fontSize={{ base: "2xl", md: "medium", lg: "3xl" }}
+              size={{ base: "xs", md: "md", lg: "lg" }}
+              onClick={() => {
+                setTimerStart(false)
+                setTime(value)
+              }}
+            >
+              {display}
+            </Button>
           ))}
         </Flex>
+        <Time currentTime={time}/>
 
       </Flex>
 
