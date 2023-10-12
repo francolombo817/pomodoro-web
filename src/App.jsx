@@ -1,14 +1,36 @@
-import { Heading, Flex, Button } from '@chakra-ui/react'
-import { initialTimer } from './component/InitialTimes'
-import { useState } from 'react'
-import Time from './component/Time'
+import { Heading, Flex, Button, useToast } from '@chakra-ui/react'
+import { initialTimer } from './component/InitialTime/index'
+import { useState, useEffect } from 'react'
+import Time from './component/Time/index'
+import PlayButton from './component/Button/PlayButton'
+import formatTime from './component/utils'
 
 function App() {
 
   const [time, setTime] = useState(0)
   const [timerStart, setTimerStart] = useState(false)
 
-  console.log(time, timerStart);
+  const toast = useToast()
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (time > 0) {
+        setTime(time - 1)
+      } else if (time === 0 && timerStart) {
+        toast({
+          title: "el temporizador se detubo",
+          status: "error",
+          position: "top-right"
+        })
+        clearInterval(interval)
+      }
+    }, 1000)
+
+    document.title = `${formatTime(time)} - Remaining `
+
+    return () => clearInterval(interval)
+  }, [timerStart, time, toast])
+
 
   return (
     <Flex
@@ -57,11 +79,16 @@ function App() {
             </Button>
           ))}
         </Flex>
-        <Time currentTime={time}/>
+        <Time currentTime={time} />
+        <Flex alignItems={'center'} gap={2}>
+          <PlayButton isStarted={timerStart} currentTime={time}
 
+            handleClick={() => {
+              !time ? alert("configura el temporizados") : setTimerStart(!timerStart)
+            }}
+          />
+        </Flex>
       </Flex>
-
-
     </Flex>
   )
 }
