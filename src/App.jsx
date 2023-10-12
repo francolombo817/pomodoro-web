@@ -84,7 +84,12 @@ function App() {
           <PlayButton isStarted={timerStart} currentTime={time}
 
             handleClick={() => {
-              !time ? alert("configura el temporizados") : setTimerStart(!timerStart)
+              !time ? toast({
+                title: "configura el temporizaador",
+                status: "warning",
+                position: "top-right"
+              })
+                : setTimerStart(!timerStart)
             }}
           />
         </Flex>

@@ -4,7 +4,7 @@ export const initialTimer = [
     display: "Pomodoro",
   },
   {
-    value: 3,
+    value: 300,
     display: "Short Break",
   },
   {
