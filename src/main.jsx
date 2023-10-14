@@ -6,16 +6,16 @@ import Fonts from './Fonts.jsx'
 
 const theme = extendTheme({
   fonts: {
-    heading: "Montserrat",
-    body: "Raleway"
-  }
+    heading: 'Montserrat',
+    body: 'Raleway',
+  },
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <Fonts/>
+      <Fonts />
       <App />
     </ChakraProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
