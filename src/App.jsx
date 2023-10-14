@@ -53,7 +53,7 @@ function App() {
       alignItems="Center"
       flexDirection="column"
       gap={6}
-      bgGradient='linear(to-tl, red.800, red.900)'
+      bgGradient='linear(to-tl, green.800, green.900)'
     >
       <Heading
         color={"white"}
@@ -64,7 +64,7 @@ function App() {
         pomodoro
       </Heading>
 
-      <Flex bgGradient={'linear(to-b, red.700, red.900)'}
+      <Flex bgGradient={'linear(to-b, green.700, green.900)'}
         p={{ base: 6, md: 9, lg: 12 }}
         rounded={"2xl"}
         alignItems={"center"}
