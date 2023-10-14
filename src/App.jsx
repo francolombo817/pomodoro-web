@@ -3,7 +3,8 @@ import { initialTimer } from './component/InitialTime/index'
 import { useState, useEffect } from 'react'
 import Time from './component/Time/index'
 import PlayButton from './component/Button/PlayButton'
-import formatTime from './component/utils'
+import { formatTime, playNotificationSound } from './component/utils'
+import ResetButton from './component/Button/ResetButton'
 
 function App() {
 
@@ -14,22 +15,35 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (timerStart) {
       if (time > 0) {
         setTime(time - 1)
       } else if (time === 0 && timerStart) {
+        playNotificationSound()
         toast({
           title: "el temporizador se detubo",
           status: "error",
           position: "top-right"
         })
         clearInterval(interval)
-      }
+      }}
     }, 1000)
 
     document.title = `${formatTime(time)} - Remaining `
 
     return () => clearInterval(interval)
   }, [timerStart, time, toast])
+
+  useEffect(() => {
+    if (timerStart) {
+      playNotificationSound()
+      toast ({
+        title: "empieza el conteo",
+        status: "success",
+        position: "top-right"        
+      })
+    }
+  }, [timerStart])
 
 
   return (
@@ -81,7 +95,17 @@ function App() {
         </Flex>
         <Time currentTime={time} />
         <Flex alignItems={'center'} gap={2}>
-          <PlayButton isStarted={timerStart} currentTime={time}
+
+          <ResetButton
+            handleOnClick={() => {
+              setTimerStart(false)
+              setTime(initialTimer[0].value)
+            }}
+          />
+
+          <PlayButton 
+          isStarted={timerStart}
+           currentTime={time}
 
             handleClick={() => {
               !time ? toast({

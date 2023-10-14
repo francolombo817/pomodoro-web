@@ -1,9 +1,8 @@
 import { Text } from "@chakra-ui/react";
-import formatTime from "../utils";
+import { formatTime } from "../utils";
 
 
-// eslint-disable-next-line react/prop-types
-export default function Time({ currentTime }) {
+export default function Time({currentTime}) {
 
     return (
         <Text 
